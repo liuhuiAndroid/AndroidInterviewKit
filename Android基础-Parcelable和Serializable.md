@@ -2,8 +2,6 @@ Explain the differences between Parcelable and Serializable in Android. When wou
 
 解释 Android 中 Parcelable 和 Serializable 之间的区别。 您何时会选择其中之一来进行对象序列化，为什么？
 
-
-
 Parcelable and Serializable are two mechanisms(/ ˈmekəˌnɪzəm /) in Android for object serialization, but they differ in terms of performance and use cases.
 Parcelable 和 Serialized 是 Android 中用于对象序列化的两种机制，但它们在性能和用例方面有所不同。
 
@@ -16,6 +14,10 @@ On the other hand, Parcelable is an Android-specific interface optimized for per
 In summary, if the goal is to serialize objects for general Java purposes, Serializable is appropriate. However, for Android-specific use cases, especially when performance is crucial(/ ˈkruːʃ(ə)l /), using Parcelable is often the preferred choice.
 总之，如果目标是为了一般 Java 目的而序列化对象，则 Serialized 是合适的。 然而，对于 Android 特定的用例，尤其是当性能至关重要时，使用 Parcelable 通常是首选。
 
+
+
+序列化：将实例的状态转换为可以存储或传输的形式的过程
+
 Parcelable
 
 - 对象自行实现出入口方法，避免对类结构的反射
@@ -27,3 +29,13 @@ Serializable
 - 用反射获取类的结构和属性信息，过程中会产生中间信息
 - 有缓存结构，在解析相同类型的情况下，能复用缓存
 - 性能在可接受的范围内，易用性比较好
+
+
+
+Parcelable 为什么速度优于 Serializable？
+
+- 在大多数场景下，Parcelable 确实存在性能优势，Serializable 的性能缺陷来自，需要通过反射构建 ObjectStreamClass 类型的描述信息
+
+- 构建 ObjectStreamClass 类型的描述信息的过程，有缓存机制，能够大量复用缓存的使用场景下，Serializable 反而会存在性能优势
+
+- Parcelable 原本在易用性上存在短板，但 Kotlin 的 Parcelize 很好的弥补了 Parcelable 的易用性
