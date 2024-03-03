@@ -1,6 +1,6 @@
 当用户点击应用图标启动应用时，系统首先会检查应用是否已经在后台运行。如果是，则系统会唤醒应用的进程，否则，将启动一个新的进程。随后，系统会初始化应用的Application类，这是整个应用生命周期的入口。在这个阶段，可以进行一些全局的初始化操作。接下来，系统会启动应用的主Activity。Activity是应用中负责用户界面和用户交互的主要组件。在Activity的生命周期方法中（如onCreate()、onStart()、onResume()），可以进行界面的准备工作和数据加载。一旦主Activity准备就绪，系统就会将应用的界面显示在屏幕上，用户便可以开始与应用进行交互。整个过程包括了应用的进程管理、Application的初始化以及主Activity的启动和界面展示。
 
-当我们点击应用图标时，系统都做了什么？
+#### 当我们点击应用图标时，系统都做了什么？
 
 冷启动：App进程 -> Application -> FirstActivity；包括 App 进程创建、Application 实例创建、Activity 实例创建、Activity 的显示
 
@@ -17,7 +17,7 @@
 5. 如何启动未注册的 Activity
 6. 启动速度优化的一些思路
 
-冷启动流程：
+#### 冷启动流程：
 
 1. Launcher 请求 startActivity 告知 AMS
 2. AMS 告知 Zygote 进程，请求启动 App 进程
@@ -58,6 +58,8 @@ ClientTransaction
 
 进程内启动 Activity
 
-如何启动未注册的 Activity？
+#### 如何启动未注册的 Activity？
+
+
 
 ATM 为 Activity 分配 Task

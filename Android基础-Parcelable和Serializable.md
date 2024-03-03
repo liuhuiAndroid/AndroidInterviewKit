@@ -6,13 +6,13 @@ Parcelable and Serializable are two mechanisms(/ ˈmekəˌnɪzəm /) in Android 
 Parcelable 和 Serialized 是 Android 中用于对象序列化的两种机制，但它们在性能和用例方面有所不同。
 
 Serializable is a more generic Java interface used for object serialization. It is easy to implement but can be less efficient (/ ɪˈfɪʃ(ə)nt /) due to the reflection-based approach it uses. It serializes objects into a stream of bytes, making it suitable for scenarios(/ səˈnærioʊz /) where objects need to be stored or transmitted.
-Serialized 是一个更通用的 Java 接口，用于对象序列化。 它很容易实现，但由于它使用基于反射的方法，效率可能较低。 它将对象序列化为字节流，适合需要存储或传输对象的场景。
+Serializable 是一个更通用的 Java 接口，用于对象序列化。 它很容易实现，但由于它使用基于反射的方法，效率可能较低。 它将对象序列化为字节流，适合需要存储或传输对象的场景。
 
 On the other hand, Parcelable is an Android-specific interface optimized for performance. It requires explicit implementation but is faster than Serializable because it operates at the object level and doesn't rely on reflection. Parcelable is recommended for Android-specific scenarios like passing data between components within the same app, especially in performance-critical situations such as ListView or RecyclerView adapters.
-另一方面，Parcelable 是针对性能进行优化的 Android 专用接口。 它需要显式实现，但比 Serialized 更快，因为它在对象级别运行并且不依赖反射。 Parcelable 建议用于特定于 Android 的场景，例如在同一应用程序内的组件之间传递数据，特别是在性能关键的情况下，例如 ListView 或 RecyclerView 适配器。
+另一方面，Parcelable 是针对性能进行优化的 Android 专用接口。 它需要显式实现，但比 Serializable 更快，因为它在对象级别运行并且不依赖反射。 Parcelable 建议用于特定于 Android 的场景，例如在同一应用程序内的组件之间传递数据，特别是在性能关键的情况下，例如 ListView 或 RecyclerView 适配器。
 
 In summary, if the goal is to serialize objects for general Java purposes, Serializable is appropriate. However, for Android-specific use cases, especially when performance is crucial(/ ˈkruːʃ(ə)l /), using Parcelable is often the preferred choice.
-总之，如果目标是为了一般 Java 目的而序列化对象，则 Serialized 是合适的。 然而，对于 Android 特定的用例，尤其是当性能至关重要时，使用 Parcelable 通常是首选。
+总之，如果目标是为了一般 Java 目的而序列化对象，则 Serializable 是合适的。 然而，对于 Android 特定的用例，尤其是当性能至关重要时，使用 Parcelable 通常是首选。
 
 
 
@@ -22,7 +22,7 @@ Parcelable
 
 - 对象自行实现出入口方法，避免对类结构的反射
 - 二进制流存储在连续内存中，占用空间更小
-- 牺牲易用性（可以通过Parcellize弥补），换取极致的性能
+- 牺牲易用性（可以通过Parcelize弥补），换取极致的性能
 
 Serializable
 
