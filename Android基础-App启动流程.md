@@ -60,6 +60,10 @@ ClientTransaction
 
 #### 如何启动未注册的 Activity？
 
-
-
 ATM 为 Activity 分配 Task
+
+
+
+#### WMS作用
+
+WMS（Window Manager Service）是一个系统级服务，主要负责管理窗口（Window）的显示和布局。

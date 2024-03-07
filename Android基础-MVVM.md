@@ -14,3 +14,9 @@ ViewModel：位于视图和模型之间，负责处理视图和模型之间的�
 MVVM的核心思想是实现数据驱动的界面，通过将业务逻辑从视图中分离出来，使得代码更加模块化、可维护性更强。在Android开发中，Jetpack组件中的ViewModel和Data Binding库通常与MVVM一起使用，以实现更优雅的界面开发。
 
 Data Binding、Jetpack ViewModel、Jetpack LiveData、Jetpack Compose、Kotlin Flow等官方工具库和官方实践，都是为了解决Android MVC时期存在的种种问题，这些工具，大多符合MVVM的思想。
+
+
+
+#### MVI
+
+单向数据流
