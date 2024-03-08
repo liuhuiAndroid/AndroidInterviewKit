@@ -4,6 +4,8 @@
 2. **重写`onDraw`方法：** 在`onDraw`方法中绘制圆形头像。
 3. **在布局文件中使用自定义View：** 在XML布局文件中使用你的自定义View。
 
+
+
 #### View 绘制流程
 
 1. measure（测量）阶段
@@ -14,6 +16,10 @@
    
    3. 通过 `setMeasuredDimension()` 来设置 View 的测量宽度和高度。
 
+   可以根据 `MeasureSpec` 来测量自定义 `View` 的大小，并确保其满足父容器的测量要求。
+   
+   `MeasureSpec` 由两部分组成：测量模式（measure mode）和测量值（measure size）
+   
 2. layout（布局）阶段
    
    1. 在 `layout` 阶段，系统会调用每个 View 的 `onLayout()` 方法，确定 View 在父容器中的位置。
@@ -40,13 +46,9 @@
    
    如果开启了硬件加速，还会涉及绘制缓存的处理，可以通过 `setLayerType()` 方法来设置。
 
-7. 绘制完成
-   
-   绘制完成后，最终将图像显示在屏幕上。
-   
-   注意：View的绘制通常发生在`onCreate`之后，在`onResume`之前。
-   
-   View的绘制是在`onDraw`方法中完成的，而`onDraw`方法的调用通常由系统自动触发，或者通过手动调用`invalidate`来请求重新绘制。
+注意：View的绘制通常发生在`onCreate`之后，在`onResume`之前。
+
+View的绘制是在`onDraw`方法中完成的，而`onDraw`方法的调用通常由系统自动触发，或者通过手动调用`invalidate`来请求重新绘制。
 
 
 
@@ -57,5 +59,4 @@
 2. 使用 view 的 post 方法
 
 3. getViewTreeObserver().addOnGlobalLayoutListener()
-
 

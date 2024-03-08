@@ -23,3 +23,9 @@ onResume 生命周期内通过 addView 的方式创建 ViewRootImpl，并用它�
 3. `View`是`Window`中显示的实际内容，它们构成了用户界面的各个元素。
 
 在Android应用中，这三者共同协作，`Activity`负责管理应用的生命周期和用户交互，`Window`负责显示和管理`Activity`的界面，而`View`则是构成界面的基本单元。
+
+
+
+#### Fragment 生命周期
+
+onAttach onCreate onCreateView onActivityCreated onStart onResume onPause onStop onDestroyView onDestroy onDetach
