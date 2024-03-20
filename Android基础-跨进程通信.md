@@ -9,3 +9,7 @@ AIDL（Android Interface Definition Language）是Android系统中用于实现�
 #### Binder 原理
 
 整个Binder通信的流程可以简单概括为客户端通过Binder引用获取代理对象，然后通过代理对象向服务端发送请求，服务端通过Binder对象处理请求并返回结果。Binder的原理为Android系统提供了高效、安全的跨进程通信机制。
+
+
+
+IPC机制

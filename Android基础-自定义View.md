@@ -55,8 +55,6 @@ View的绘制是在`onDraw`方法中完成的，而`onDraw`方法的调用通常
 #### 如何在 onCreate 中获取 View 的宽高
 
 1. view.addOnPreDrawListener 可以在绘制之前获取其宽度和高度
-
-2. 使用 view 的 post 方法
-
-3. getViewTreeObserver().addOnGlobalLayoutListener()
+2. 使用 `View.post()` 方法
+3. 使用 `ViewTreeObserver.OnGlobalLayoutListener`
 
