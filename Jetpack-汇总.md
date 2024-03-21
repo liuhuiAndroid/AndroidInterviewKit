@@ -2,7 +2,7 @@
 
 为了帮助开发者更高效、更容易地构建优秀的应用，Google 推出了 Android Jetpack。它包含了开发库、工具、以及最佳实践指南。
 
-#### DataBinding
+#### DataBinding vs ViewBinding
 
 
 

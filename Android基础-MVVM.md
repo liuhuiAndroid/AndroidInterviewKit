@@ -24,3 +24,7 @@ Data Binding、Jetpack ViewModel、Jetpack LiveData、Jetpack Compose、Kotlin F
 #### MVI
 
 单向数据流
+
+
+
+#### 问题：介绍一下目前开发的项目结构
