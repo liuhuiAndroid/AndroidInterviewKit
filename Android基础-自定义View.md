@@ -58,3 +58,15 @@ View的绘制是在`onDraw`方法中完成的，而`onDraw`方法的调用通常
 2. 使用 `View.post()` 方法
 3. 使用 `ViewTreeObserver.OnGlobalLayoutListener`
 
+
+
+#### 自定义ViewGroup流程
+
+需要梳理
+
+
+
+#### 自定义 View 如何处理文本过错问题
+
+1. 在 onSizeChanged 方法中调用 TextUtils.ellipsize 
+2. onDraw 只负责使用已处理的文本进行绘制

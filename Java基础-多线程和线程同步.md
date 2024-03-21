@@ -109,9 +109,13 @@
     executor.shutdown();
     ```
     
-  - newSingleThreadExecutor() 单线程
+  - new SingleThreadExecutor() 单线程
 
-  - newScheduleThreadPool() 
+  - new ScheduleThreadPool() 
+
+  - new ThreadPoolExecutor
+
+    - 最大线程数是线程池允许创建的最大线程数量。当工作队列满了之后，线程池会创建新的线程来处理任务，直到线程数量达到这个最大值。
 
 - Callable 和 Future，不常用也比较难用
 

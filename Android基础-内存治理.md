@@ -72,3 +72,19 @@ OOM：pthread_create failed.
 - 避免过度的页面绘制
 - 及时关闭I/O和Cursor
 - 及时释放HandlerThread
+
+
+
+#### 常用的内存优化工具
+
+
+
+#### 举例实际解决过的项目中的内存问题
+
+
+
+#### 如何实现线上性能监控？解决线上内存问题
+
+- **Android Profiler**：Android Studio 内置的 Profiler 工具可以用于监控内存使用情况，但它主要用于开发和测试阶段，而非线上环境。
+- **LeakCanary**：一个开源库，用于检测 Android 应用中的内存泄漏。它可以在开发过程中使用，也可以配置为在线上环境中运行，以便捕获并报告内存泄漏。
+- **MAT (Memory Analyzer Tool)**：一个强大的 Java 堆分析工具，用于分析大型堆转储。它可以帮助你找到内存泄漏和减少内存占用。

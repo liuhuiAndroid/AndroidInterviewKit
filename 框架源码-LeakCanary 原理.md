@@ -74,7 +74,12 @@ LeakCanary 是一个用于检测Android应用中内存泄漏的开源库。它�
 
 
 
+#### LeakCanary 可不可以使用软引用来监视对象的生命周期
+
+使用软引用来监视对象的生命周期在 LeakCanary 的场景中并不适用，因为它会在内存不足时失去其监视的对象，从而无法准确检测内存泄漏。
+
+
+
 #### LeakCanary 2.0 不需要主动初始化的原理
 
 ContentProvider#onCreate 会在 Application#onCreate 之前先执⾏ ，在这个 onCreate 中就可以进⾏初始化了。 LeakCanary 2.0 利⽤了这个原理，所以不需要我们⼿动进⾏初始化
-

@@ -17,6 +17,10 @@ Data Binding、Jetpack ViewModel、Jetpack LiveData、Jetpack Compose、Kotlin F
 
 
 
+#### MVVM 需要使用 DataBinding 吗？
+
+
+
 #### MVI
 
 单向数据流
