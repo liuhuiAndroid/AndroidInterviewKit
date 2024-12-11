@@ -1,6 +1,6 @@
 #### Kotlin 的 Any 和 Java 的 Object 区别
 
-
+`Any` 不允许表示 `null` 值
 
 #### Kotlin 中的 by lazy 和 lateinit 区别
 

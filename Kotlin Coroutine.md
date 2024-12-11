@@ -1,6 +1,6 @@
 #### Kotlin 协程实战训练
 
-###### 一、Kotlin 协程是什么
+###### 一、Kotlin 协程是什么 Kotlin Cooperative Routine
 
 - 协程是一种在程序中处理并发任务的方案；也是这种方案的一个组件
 - 协程和线程属于一个层级的概念
