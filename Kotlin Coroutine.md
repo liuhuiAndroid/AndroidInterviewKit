@@ -40,6 +40,14 @@
 - 并不是用来切线程的
 - 语法上是标记和提醒的作用：标记函数是挂起函数，是耗时的，需要在协程中调用，需要协程上下文
 - 编译过程也起到一定的作用
+- 挂起函数：以 suspend 修饰的函数
+- 挂起函数只能在其他挂起函数或协程中调用
+- 挂起函数调用时包含了协程挂起的语义
+- 挂起函数返回时则包含了协程恢复的语义
+- 将回调转写成挂起函数
+  - 使用 suspendCoroutine 获取挂起函数的 Continuation
+  - 回调成功的分支使用 Continuation.resume(value)
+  - 回调失败则使用 Continuation.resumeWithException(e)
 
 ###### 四、Kotlin 的协程和线程
 
@@ -74,7 +82,9 @@
   }
   ```
 
-###### 七、CoroutineScope
+###### 七、CoroutineScope 作用域
+
+- GlobalScope 顶级作用域 异常不向外部传播
 
 - 协程泄露：本质上是线程泄露
 
@@ -143,3 +153,110 @@
 1. Kotlin 协程挂起是怎么实现的
 
    Kotlin 协程的挂起是通过一种轻量级的线程切换机制实现的。
+
+
+
+###### 官方协程框架的运用
+
+- kotlinx.coroutines
+
+  - 官方协程框架，基于标准库实现的特性封装
+  - <https://github.com/Kotlin/kotlinx.coroutines>
+
+- 协程框架的引入
+
+  ```
+  // 标准库
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  // 协程基础库
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5'
+  // 协程Android库，提供Android UI调度器
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
+  ```
+
+
+
+###### 回调转协程的完整写法
+
+- 不支持取消的写法
+
+  ```
+  suspend fun <T> Call<T>.awaitNonCancellable(): T = suspendCoroutine{
+      ...
+  }
+  ```
+
+- 支持取消的写法
+
+  ```
+  suspend fun <T> Call<T>.await(): T = suspendCancellableCoroutine{
+      continuation ->
+      continuation.invokeOnCancellation{
+          cancel()
+      }
+      ...
+  }
+  ```
+
+- Retrofit 回调转协程，官方也有同样实现
+
+  ```
+  suspend fun <T> Call<T>.await(): T = suspendCancellableCoroutine{
+      continuation ->
+      continuation.invokeOnCancellation{
+          cancel()
+      }
+      enqueue(object:Callback<T>{
+          override fun onFailure(call: Call<T>,t: Throwable){
+              continuation.resumeWithException(t)
+          }
+          override fun onResponse(call: Call<T>,response: Response<T>){
+              response.takeIf{ it.isSuccessful }?.body()?.also{ continuation.resume(it) }?			continuation.resumeWithException(HttpException(response))
+          }
+      })
+  }
+  ```
+
+- Handler
+
+  ```
+  suspend fun <T> Handler.run(block: ()-> T) = suspendCoroutine<T>{
+      continuation ->
+      post{
+          try{
+              continuation.resume(block())
+          }catch(e: Exception){
+              continuation.resumeWithException(e)
+          }
+      }
+  }
+  
+  suspend fun <T> Handler.runDelay(delay: Long, block: ()-> T) = suspendCancellableCoroutine<T>{
+      continuation ->
+      val message = Message.obtain(this){
+          try{
+              continuation.resume(block())
+          }catch(e: Exception){
+              continuation.resumeWithException(e)
+          }
+      }.also{
+          it.obj = continuation
+      }
+      continuation.invokeOnCancellation{
+      	removeCallbacksAndMessage(continuation)
+      }
+      sendMessageDelayed(message,delay)
+  }
+  
+  suspend fun main(){
+      Looper.prepareMainLooper()
+      GlobalScope.launch{
+          val handler = Handler(Looper.getMainLooper())
+          val result = handler.run{ "Hello" }
+          val delayedResult = handler.runDelay(1000){ "World" }
+  	    Looper.getMainLooper().quit()
+      }
+  }
+  ```
+
+###### 

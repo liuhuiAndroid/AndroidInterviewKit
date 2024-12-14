@@ -1,5 +1,7 @@
 ### Jetpack
 
+[Jetpack官方文档 中文版](<https://developer.android.com/jetpack>)
+
 为了帮助开发者更高效、更容易地构建优秀的应用，Google 推出了 Android Jetpack。它包含了开发库、工具、以及最佳实践指南。
 
 #### DataBinding vs ViewBinding
@@ -42,6 +44,20 @@ Lifecycle 原理分析
 
 
 #### Hilt
+
+- API
+
+  - @HiltAndroidApp
+
+  - @AndroidEntryPoint
+
+  - @Singleton 全局单例
+
+  - @ActivityScoped Activity内单例
+
+  - @InstallIn
+
+  - @Provides 提供具体注入逻辑
 
 - 依赖注入有什么用？
 

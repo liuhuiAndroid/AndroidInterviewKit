@@ -13,8 +13,6 @@
 
 **可变性**：`by lazy` 更适合于只需要初始化一次且是 `val` 类型的属性，而 `lateinit` 更适合于可变的属性，需要在后续的代码中进行初始化。
 
-
-
 #### Kotlin let、with、run、apply、also函数的区别
 
 let	
@@ -55,15 +53,11 @@ fun T.also(block: (T) -> Unit): T
 
 it指代当前对象
 
-
-
 #### Kotlin 单例如何编写
 
 在 Kotlin 中，你可以使用对象声明（Object Declaration）来创建单例。对象声明在首次访问时被懒初始化，并且在整个应用程序生命周期内只有一个实例。
 
 可以添加一个初始化方法，接收参数
-
-
 
 #### Java反射和Kotlin反射有什么区别
 
