@@ -65,6 +65,8 @@ ANR-WatchDog
 
 [安装包立减1M–微信Android资源混淆打包工具](http://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=208135658&idx=1&sn=ac9bd6b4927e9e82f9fa14e396183a8f#rd)
 
+
+
 #### App瘦身，体积精简
 
 业务优化
@@ -98,6 +100,8 @@ ANR-WatchDog
 5. 编码算法升级：
    - 图片编码算法升级；
    - 语言编码算法升级；
+
+
 
 #### App稳定性优化
 

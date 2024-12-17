@@ -278,3 +278,74 @@
   通过对共享资源进行访问限制，让同一时间只有一个线程可以访问资源，保证了数据的准确性
 
 - 不论是线程安全问题，还是针对线程安全问题所衍生出的锁机制，它们的核心都在于共享的资源，而不是某个方法或者某几行代码
+
+
+
+#### 生产者消费者模型代码实现
+
+```java
+// 使用BlockingQueue或者synchronized关键字来进行同步
+public class ProducerConsumerExample {
+    public static void main(String[] args) {
+        Warehouse warehouse = new Warehouse();
+        Thread producerThread = new Thread(new Producer(warehouse));
+        Thread consumerThread = new Thread(new Consumer(warehouse));
+        producerThread.start();
+        consumerThread.start();
+    }
+}
+class Warehouse {
+    private static final int CAPACITY = 5;
+    private String[] products = new String[CAPACITY];
+    private int count = 0;
+    public synchronized void produce(String product) {
+        try {
+            while (count == CAPACITY) {
+                wait(); // 仓库已满，等待消费
+            }
+            products[count++] = product;
+            System.out.println("Produced: " + product);
+            notify(); // 唤醒消费者
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+    public synchronized void consume() {
+        try {
+            while (count == 0) {
+                wait(); // 仓库为空，等待生产
+            }
+            String product = products[--count];
+            System.out.println("Consumed: " + product);
+            notify(); // 唤醒生产者
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+class Producer implements Runnable {
+    private final Warehouse warehouse;
+    public Producer(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+    @Override
+    public void run() {
+        while (true) {
+            warehouse.produce("Product-" + System.currentTimeMillis());
+        }
+    }
+}
+class Consumer implements Runnable {
+    private final Warehouse warehouse;
+    public Consumer(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+    @Override
+    public void run() {
+        while (true) {
+            warehouse.consume();
+        }
+    }
+}
+```
+

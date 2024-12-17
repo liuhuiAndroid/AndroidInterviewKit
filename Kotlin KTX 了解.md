@@ -73,8 +73,6 @@ Core KTX 模块为属于 Android 框架的通用库提供扩展程序。
 
 - [androidx.core.content.res](https://developer.android.google.cn/reference/kotlin/androidx/core/content/res/package-summary)
 
-  
-
 - [androidx.core.database](https://developer.android.google.cn/reference/kotlin/androidx/core/database/package-summary)
 
   包含了数据库游标的扩展函数和事务处理的简化

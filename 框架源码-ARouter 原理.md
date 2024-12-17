@@ -1,7 +1,5 @@
 https://github.com/Xiasm/EasyRouter
 
-
-
 ARouter 的基本原理
 
 1. **注解处理器：** ARouter 使用注解来标记需要进行路由的页面，例如使用 `@Route` 注解标记的 Activity 或 Fragment。注解处理器在编译时扫描这些注解，并生成相应的路由表。
