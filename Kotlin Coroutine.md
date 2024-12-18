@@ -31,9 +31,26 @@
       }
       println("Coroutines Camp ${Thread.currentThread().name}")
   }
+  
+  GlobalScope.launch(Dispatchers.Main) {
+  		val value1 = request1()
+    	val deferred2 = async{ request2() }
+    	val deferred3 = async{ request3() }
+      updateUI(deferred2.await(), deferred3.await())
+  }
   ```
 
 - 协程的额外天然优势：性能！很方便将耗时操作放在后台
+
+- runBlocking：启动一个新的协程，阻塞当前线程直到协程执行完毕
+
+- async：启动一个新的协程，并返回一个 Deferred 对象，可以通过该对象获取协程执行的结果
+
+- withContext：在当前协程中切换上下文，并执行指定的代码块
+
+- GlobalScope.launch：启动一个新的协程，不阻塞当前线程，该协程的生命周期与应用程序的生命周期相同
+
+- lifecycleScope.launch：创建一个新的协程，不阻塞当前线程，该协程的生命周期与所在页面的生命周期相同
 
 ###### 三、suspend
 
@@ -259,4 +276,11 @@
   }
   ```
 
-###### 
+###### 协程挂起和恢复原理
+
+suspend 函数会让当前协程暂时挂起，当 suspend 执行完成之后，会让当前协程恢复，继续向下执行。
+协程的核心是挂起和恢复，挂起恢复的本质是return&callback回调。
+
+可以通过AndroidStuidio 编译后，Show Kotlin Bytecode，再 Decompile 看到 suspend 函数真正实现。
+
+编译阶段追加 Continuation参数，运行时条件判断return来实现挂起恢复。
