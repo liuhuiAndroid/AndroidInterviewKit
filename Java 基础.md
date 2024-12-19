@@ -16,3 +16,25 @@ public class Singleton {
     }
 }
 ```
+
+
+
+#### 运行时异常与编译时异常
+
+运行时异常：
+
+NullPointerException
+
+ArrayIndexOutOfBoundsException
+
+ClassCastException
+
+编译时异常：
+
+IOException
+
+FileNotFoundException
+
+ClassNotFoundException
+
+InterruptedException

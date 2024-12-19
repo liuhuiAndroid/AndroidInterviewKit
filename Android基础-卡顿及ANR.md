@@ -1,3 +1,7 @@
+#### 卡顿如何优化？
+
+工具选择：Systrace、StrictMode
+
 #### 什么是ANR？
 
 Application Not responding是Android系统中的一种错误状态，指的是当应用程序在主线程上执行太长时间而无法响应用户输入时发生的情况。
