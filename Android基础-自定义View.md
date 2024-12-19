@@ -1,10 +1,48 @@
+#### 布局流程
+
+从整体看：
+
+- 测量流程：从根 View 递归调⽤每⼀级⼦ View 的 measure() ⽅法，对它们进⾏
+  
+  测量
+
+- 布局流程：从根 View 递归调⽤每⼀级⼦ View 的 layout() ⽅法，把测量过程得
+  
+  出的⼦ View 的位置和尺⼨传给⼦ View，⼦ View 保存
+
+为什么要分两个流程？因为可能会重复测量。
+
+从个体看，对于每个 View：
+
+- 运⾏前，开发者在 xml ⽂件⾥写⼊对 View 的布局要求 layout_xxx
+
+- ⽗ View 在⾃⼰的 onMeasure() 中，根据开发者在 xml 中写的对⼦ View 的要
+  
+  求，和⾃⼰的可⽤空间，得出对⼦ View 的具体尺⼨要求
+
+- ⼦ View 在⾃⼰的 onMeasure() 中，根据⽗ View 的要求和⾃⼰的特性算出⾃⼰
+  
+  的期望尺⼨
+
+- 如果是 ViewGroup，还会在这⾥调⽤每个⼦ View 的 measure() 进⾏测量
+
+- ⽗ View 在⼦ View 计算出期望尺⼨后，得出⼦ View 的实际尺⼨和位置
+
+- ⼦ View 在⾃⼰的 layout() ⽅法中，将⽗ View 传进来的⾃⼰的实际尺⼨和位置
+  
+  保存
+  
+  - 如果是 ViewGroup，还会在 onLayout() ⾥调⽤每个⼦ View 的 layout() 把
+    
+    它们的尺⼨位置传给它们
+
+
+
 #### 如何设计一个头像的自定义`View`，要求使头像展示出来是一个圆形？
 
 1. **创建一个自定义View类**
 2. **重写`onDraw`方法：** 在`onDraw`方法中绘制圆形头像。
 3. **在布局文件中使用自定义View：** 在XML布局文件中使用你的自定义View。
-
-
 
 #### View 绘制流程
 
@@ -15,11 +53,11 @@
    2. `onMeasure()` 方法中会根据 View 的 `LayoutParams` 和父容器的要求来计算宽度和高度。
    
    3. 通过 `setMeasuredDimension()` 来设置 View 的测量宽度和高度。
-
+   
    可以根据 `MeasureSpec` 来测量自定义 `View` 的大小，并确保其满足父容器的测量要求。
    
    `MeasureSpec` 由两部分组成：测量模式（measure mode）和测量值（measure size）
-   
+
 2. layout（布局）阶段
    
    1. 在 `layout` 阶段，系统会调用每个 View 的 `onLayout()` 方法，确定 View 在父容器中的位置。
@@ -50,21 +88,15 @@
 
 View的绘制是在`onDraw`方法中完成的，而`onDraw`方法的调用通常由系统自动触发，或者通过手动调用`invalidate`来请求重新绘制。
 
-
-
 #### 如何在 onCreate 中获取 View 的宽高
 
 1. view.addOnPreDrawListener 可以在绘制之前获取其宽度和高度
 2. 使用 `View.post()` 方法
 3. 使用 `ViewTreeObserver.OnGlobalLayoutListener`
 
-
-
 #### 自定义ViewGroup流程
 
 需要梳理
-
-
 
 #### 自定义 View 如何处理文本过错问题
 
