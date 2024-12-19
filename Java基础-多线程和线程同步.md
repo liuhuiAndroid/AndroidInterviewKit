@@ -96,7 +96,7 @@
     executor.execute(runnable);
     ```
   
-  - 短时批量处理：newFixedThreadPool()
+  - 短时批量处理：newFixedThreadPool()，实现一次性的操作
     
     创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待
     
@@ -113,10 +113,18 @@
   
   - new ScheduleThreadPool() 
   
-  - new ThreadPoolExecutor
+  - new ThreadPoolExecutor 自己创建一个新的线程池
     
     - 最大线程数是线程池允许创建的最大线程数量。当工作队列满了之后，线程池会创建新的线程来处理任务，直到线程数量达到这个最大值。
-
+    
+    当调用线程池 execute() 方法添加一个任务时，线程池会做如下判断：
+    
+    - 如果有空闲线程，则直接执行该任务；
+    - 如果没有空闲线程，且当前运行的线程数少于 corePoolSize ，则创建新的线程执行该任务；
+    - 如果没有空闲线程，且当前的线程数等于 corePoolSize，同时阻塞队列未满，则将任务入队列，而不添加新的线程；
+    - 如果没有空闲线程，且阻塞队列已满，同时池中的线程数小于 maximumPoolSize ，则创建新的线程执行任务；
+    - 如果没有空闲线程，且阻塞队列已满，同时池中的线程数等于 maximumPoolSize ，则根据构造函数中的 handler 指定的策略来拒绝新的任务。
+  
 - Callable 和 Future，不常用也比较难用
   
   Callable 接口类似于 Runnable，但是 Runnable 不会返回结果，并且无法抛出返回结果的异常，而 Callable功能更强大一些，被线程执行后，可以返回值，这个返回值可以被 Future 拿到，也就是说，Future 可以拿到异步执行任务的返回值。
