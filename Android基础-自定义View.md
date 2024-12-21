@@ -24,17 +24,63 @@
   
   的期望尺⼨
 
-- 如果是 ViewGroup，还会在这⾥调⽤每个⼦ View 的 measure() 进⾏测量
-
+  - 如果是 ViewGroup，还会在这⾥调⽤每个⼦ View 的 measure() 进⾏测量
+  
 - ⽗ View 在⼦ View 计算出期望尺⼨后，得出⼦ View 的实际尺⼨和位置
 
 - ⼦ View 在⾃⼰的 layout() ⽅法中，将⽗ View 传进来的⾃⼰的实际尺⼨和位置
-  
+
   保存
-  
+
   - 如果是 ViewGroup，还会在 onLayout() ⾥调⽤每个⼦ View 的 layout() 把
     
     它们的尺⼨位置传给它们
+
+
+
+**⾃定义布局：尺⼨的⾃定义**
+
+1. 继承已有的View，简单改写它们的尺⼨
+   1. 重写 onMeasure()
+   2. ⽤ getMeasuredWidth() 和 getMeasuredHeight() 获取到测量出的尺⼨
+   3. 计算出最终要的尺⼨
+   4. ⽤ setMeasuredDimension(width, height) 把结果保存
+   5. 例⼦：SquareImageView
+2. 对⾃定义 View 完全进行自定义尺⼨计算
+   1. 重写 onMeasure()
+   2. 计算出⾃⼰的尺⼨
+   3. ⽤ resolveSize() 或者 resolveSizeAndState() 修正结果
+   4. 使⽤ setMeasuredDimension(width, height) 保存结果
+   5. 例⼦：CircleView
+3. 自定义 Layout：重写 onMeasure() 和 onLayout()
+   1. TagLayout
+   2. 查看 google官方 flexbox-layout 源码
+
+
+
+**⾃定义** **Layout**
+
+- 重写 onMeasure()
+
+  - 遍历每个⼦ View，测量⼦ View
+
+    - 测量完成后，得出⼦ View 的实际位置和尺⼨，并暂时保存
+    - 有些⼦ View 可能需要重新测量
+
+  - 测量出所有⼦ View 的位置和尺⼨后，计算出⾃⼰的尺⼨，并⽤
+
+    setMeasuredDimension(width, height) 保存
+
+- 重写 onLayout()
+
+  - 遍历每个⼦ View，调⽤它们的 layout() ⽅法来将位置和尺⼨传给它们
+
+- 例⼦：TagLayout
+
+
+
+1. resolveSizeAndState 方法原理
+2. measureChildWithMargins 方法原理
 
 
 
