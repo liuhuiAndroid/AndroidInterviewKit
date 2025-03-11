@@ -814,7 +814,8 @@ LaunchedEffect(Unit){
 var rememberedWelcome by remember { mutableStateOf(welcome) }
 rememberedWelcome = welcome
 // 替代上面代码
-val rememberedWelcome by rememberUpdatedState(welcome) 
+val rememberedWelcome by rememberUpdatedState(welcome)
+// 解决参数方法传递失效问题
 ```
 
 ##### 协程：rememberCoroutineScope()
@@ -890,7 +891,7 @@ LaunchedEffect(Unit){
   	position = newPosition
   }
 }
-// 等价于
+// 等价于上面，在协程里更新 State 的值
 val produceState = produceState(Point(0, 0)) {
   positionState.collect { newPosition ->
   	position = newPosition
